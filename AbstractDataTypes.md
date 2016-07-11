@@ -1,9 +1,6 @@
----
-layout: post
-title: Abstract Data Types
----
+# ABSTRACT DATA TYPES
 
-# DATA TYPES
+# Data Types
 
 A data type is characterized by:
 + a set of values
