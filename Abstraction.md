@@ -1,7 +1,4 @@
----
-layout: post
-title: Abstraction
----
+# ABSTRACTION
 
 
 **Abstraction** is a process of hiding the
