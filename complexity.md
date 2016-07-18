@@ -87,57 +87,69 @@ Another algorithm used for sorting is called merge sort. The details are somewha
 
  n	T(n)	Tm(n)
 ---	----	-----
-2	6	11
-3	14	26
-4	24	44
-5	36	64
-6	50	86
-7	66	108
-8	84	133
-9	104	158
-10	126	184
-11	150	211
-12	176	238
-13	204	266
-14	234	295
-15	266	324
-16	300	354
-17	336	385
-18	374	416
-19	414	447
-20	456	479
+    2	6	11
+    3	14	26
+    4	24	44
+    5	36	64
+    6	50	86
+    7	66	108
+    8	84	133
+    9	104	158
+    10	126	184
+    11	150	211
+    12	176	238
+    13	204	266
+    14	234	295
+    15	266	324
+    16	300	354
+    17	336	385
+    18	374	416
+    19	414	447
+    20	456	479
+    
 T(n) seems to outperform Tm(n) here, so at first glance one might think selection sort is better than merge sort. But if we extend the table:
- n	T(n)	Tm(n)
----	----	-----
-20	456	479
-21	500	511
-22	546	544
-23	594	576
-24	644	610
-25	696	643
-26	750	677
-27	806	711
-28	864	746
-29	924	781
-30	986	816
+
+
+    n	T(n)	Tm(n)
+   ---	----	-----
+    20	456	479
+    21	500	511
+    22	546	544
+    23	594	576
+    24	644	610
+    25	696	643
+    26	750	677
+    27	806	711
+    28	864	746
+    29	924	781
+    30	986	816
 we see that merge sort starts to take a little less time than selection sort for larger values of n. If we extend the table to large values:
- n		T(n)			Tm(n)
----		----			-----
-100     	10,296    		3,684
-1,000    	1,002,996  		55,262
-10,000   	100,029,996       	736,827
-100,000  	10,000,299,996     	9,210,340
-1,000,000 	1,000,002,999,996   	110,524,084
-10,000,000      100,000,029,999,996 	1,289,447,652
+
+     n		T(n)			Tm(n)
+    ---		----			-----
+    100     	10,296    		3,684
+    1,000    	1,002,996  		55,262
+    10,000   	100,029,996       	736,827
+    100,000  	10,000,299,996     	9,210,340
+    1,000,000 	1,000,002,999,996   	110,524,084
+    10,000,000      100,000,029,999,996 	1,289,447,652
+    
+    
 we see that merge sort does much better than selection sort. To put this in perspective, recall that a typical memory access is done on the order of nanoseconds, or billionths of a second. Selection sort on ten million items takes roughly 100 trillion accesses; if each one takes ten nanoseconds (an optimistic assumption based on 1998 hardware) it will take 1,000,000 seconds, or about 11 and a half days to complete. Merge sort, with a "mere" 1.2 billion accesses, will be done in 12 seconds. For a billion elements, selection sort takes almost 32,000 years, while merge sort takes about 37 minutes. And, assuming a large enough RAM size, a trillion elements will take selection sort 300 million years, while merge sort will take 32 days. Since computer hardware is not resilient to the large asteroids that hit our planet roughly once every 100 million years causing mass extinctions, selection sort is not feasible for this task. (Note: you will notice as you study CS that computer scientists like to put things in astronomical and geological terms when trying to show an approach is the wrong one. Just humor them.)
-Asymptotic Notation
+
+## Asymptotic Notation
 
 This function we came up with, T(n) = n2 + 3n - 4, describes precisely the number of array accesses made in the algorithm. In a sense, it is a little too precise; all we really need to say is n2; the lower order terms contribute almost nothing to the sum when n is large. We would like a way to justify ignoring those lower order terms and to make comparisons between algorithms easy. So we use asymptotic notation.
-Big O
+
+### Big O
 
 The most common notation used is "big O" notation. In the above example, we would say n2 + 3n - 4 = O(n2) (read "big oh of n squared"). This means, intuitively, that the important part of n2 + 3n - 4 is the n2 part.
-Definition: Let f(n) and g(n) be functions, where n is a positive integer. We write f(n) = O(g(n)) if and only if there exists a real number c and positive integer n0 satisfying 0 <= f(n) <= cg(n) for all n >= n0. (And we say, "f of n is big oh of g of n." We might also say or write f(n) is in O(g(n)), because we can think of O as a set of functions all with the same property. But we won't often do that in Data Structures.)
+
+**Definition:** Let f(n) and g(n) be functions, where n is a positive integer. 
+
+We write f(n) = O(g(n)) if and only if there exists a real number c and positive integer n0 satisfying 0 <= f(n) <= cg(n) for all n >= n0. (And we say, "f of n is big oh of g of n." We might also say or write f(n) is in O(g(n)), because we can think of O as a set of functions all with the same property. But we won't often do that in Data Structures.)
 This means that, for example, that functions like n2 + n, 4n2 - n log n + 12, n2/5 - 100n, n log n, 50n, and so forth are all O(n2). Every function f(n) bounded above by some constant multiple g(n) for all values of n greater than a certain value is O(g(n)).
+
 Examples:
 
 Show 3n2 + 4n - 2 = O(n2). 
@@ -156,8 +168,10 @@ n3 <= cn2 for all n >= n0.
 Dividing by n2, we get:
 n <= c for all n >= n0.
 But this is not possible; we can never choose a constant c large enough that n will never exceed it, since n can grow without bound. Thus, the original assumption, that n3 = O(n2), must be wrong so n3 != O(n2).
+
 Big O gives us a formal way of expressing asymptotic upper bounds, a way of bounding from above the growth of a function. Knowing where a function falls within the big-O hierarchy allows us to compare it quickly with other functions and gives us an idea of which algorithm has the best time performance. And yes, there is also a "little o" we'll see later.
-Properties of Big O
+
+#### Properties of Big O
 
 The definition of big O is pretty ugly to have to work with all the time, kind of like the "limit" definition of a derivative in Calculus. Here are some helpful theorems you can use to simplify big O calculations:
 Any kth degree polynomial is O(nk).
@@ -166,7 +180,8 @@ Big O is transitive. That is, if f(n) = O(g(n)) and g(n) is O(h(n)), then f(n) =
 logan = O(logb n) for any a, b > 1. This practically means that we don't care, asymptotically, what base we take our logarithms to. (I said asymptotically. In a few cases, it does matter.)
 Big O of a sum of functions is big O of the largest function. How do you know which one is the largest? The one that all the others are big O of. One consequence of this is, if f(n) = O(h(n)) and g(n) is O(h(n)), then f(n) + g(n) = O(h(n)).
 f(n) = O(g(n)) is true if limn->infinityf(n)/g(n) is a constant.
-Lower Bounds and Tight Bounds
+
+#### Lower Bounds and Tight Bounds
 
 Big O only gives you an upper bound on a function, i.e., if we ignore constant factors and let n get big enough, we know some function will never exceed some other function. But this can give us too much freedom. For instance, the time for selection sort is easily O(n3), because n2 is O(n3). But we know that O(n2) is a more meaningful upper bound. What we need is to be able to describe a lower bound, a function that always grows more slowly than f(n), and a tight bound, a function that grows at about the same rate as f(n). Your book give a good theoretical introduction to these two concepts; let's look at a different (and probably easier to understand) way to approach this.
 Big Omega is for lower bounds what big O is for upper bounds:
