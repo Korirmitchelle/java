@@ -15,12 +15,12 @@ Suppose we want to put an array of n floating point numbers into ascending numer
 index	0	1	2	3	4	5	6	comments
 ---------------------------------------------------------	--------
     |	4	3	9	6	1	7	0	initial
-i=0 |	0	3	9	6	1	7	4	swap 0,4
-i=1 |	0	1	9	6	3	7	4	swap 1,3
-i=2 |	0	1	3	6	9	7	4	swap 3, 9
-i=3 |	0	1	3	4	9	7	6	swap 6, 4
-i=4 |	0	1	3	4	6	7	9	swap 9, 6
-i=5 |	0	1	3	4	6	7	9	(done)
+    i=0 |	0	3	9	6	1	7	4	swap 0,4
+    i=1 |	0	1	9	6	3	7	4	swap 1,3
+    i=2 |	0	1	3	6	9	7	4	swap 3, 9
+    i=3 |	0	1	3	4	9	7	6	swap 6, 4
+    i=4 |	0	1	3	4	6	7	9	swap 9, 6
+    i=5 |	0	1	3	4	6	7	9	(done)
 
 Here is a simple implementation in C:
 
@@ -180,6 +180,7 @@ More Properties
 
 The first four properties listed above for big O are also true for Omega and Theta.
 Replace O with  and "largest" with "smallest" in the fifth property for big O and it remains true.
+
 f(n) = (g(n)) is true if limn->infinityg(n)/f(n) is a constant.
 f(n) = (g(n)) is true if limn->infinityf(n)/g(n) is a non-zero constant.
 nk = O((1+) n)) for any positive k and . That is, any polynomial is bound from above by any exponential. So any algorithm that runs in polynomial time is (eventually, for large enough value of n) preferable to any algorithm that runs in exponential time.
